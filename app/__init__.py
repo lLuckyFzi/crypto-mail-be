@@ -15,6 +15,10 @@ def create_app():
     with app.app_context():
         from app.models.user_model import User
         from app.models.message_model import Message
+
+    from app.routes.user_routes import user_bp
+
+    app.register_blueprint(user_bp, url_prefix='/api/users')
     
     @app.route('/api/status', methods=['GET'])
     def status():
