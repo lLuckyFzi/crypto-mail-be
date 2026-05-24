@@ -18,6 +18,7 @@ def ambil_pesan():
             "id": pesan.id,
             "pengirim_id": pesan.sender_id,
             "penerima_id": pesan.receiver_id,
+            "sender_name": pesan.sender.username if pesan.sender else f"User #{pesan.sender_id}",
             "ciphertext": pesan.ciphertext,
             "dibuat_pada": pesan.created_at.isoformat() if pesan.created_at else None
         })
