@@ -2,7 +2,6 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from app.config import Config
-from app.routes.pesan_routes import pesan_bp
 
 db = SQLAlchemy()
 
@@ -18,6 +17,7 @@ def create_app():
         from app.models.message_model import Message
 
     from app.routes.user_routes import user_bp
+    from app.routes.pesan_routes import pesan_bp
 
     app.register_blueprint(user_bp, url_prefix='/api/users')
     app.register_blueprint(pesan_bp, url_prefix='/api/pesan')

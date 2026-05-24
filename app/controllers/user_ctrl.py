@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.services.user_service import register_new_user, login_user
+from app.services.user_service import register_new_user, login_user, cari_user_by_username
 
 def register():
     try:
@@ -46,3 +46,19 @@ def login():
         return jsonify({"status": "error", "message": str(e)}), 404
     except Exception as e:
         return jsonify({"status": "error", "message": "Terjadi kesalahan server"}), 500
+
+def search_user():
+    username = request.args.get("username")
+
+    if not username:
+        return jsonify({"status": "error", "message": "Username kosong"}), 400
+
+    user_data = cari_user_by_username(username)
+
+    if not user_data:
+        return jsonify({"status": "error", "message": "User tidak ditemukan"}), 404
+
+    return jsonify({
+        "status": "success",
+        "data": user_data
+    }), 200

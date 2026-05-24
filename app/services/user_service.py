@@ -38,3 +38,17 @@ def login_user(username):
         "public_key_e": user.public_key_e,
         "public_key_n": user.public_key_n
     }
+
+def cari_user_by_username(username):
+    # Gunakan exact match (filter_by) agar output tidak bingung memilih array
+    user = User.query.filter_by(username=username).first()
+    
+    if not user:
+        return None
+        
+    return {
+        "user_id": user.id,
+        "username": user.username,
+        "public_key_e": user.public_key_e,
+        "public_key_n": user.public_key_n
+    }
